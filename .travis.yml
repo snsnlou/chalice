@@ -1,10 +1,13 @@
 language: python
 python:
-  - "2.7"
+- '2.7'
 sudo: false
 install:
-  - pip install -e .
-  - travis_retry pip install -r requirements-dev.txt
+- pip install -e .
+- travis_retry pip install -r requirements-dev.txt
+before_script:
+- bash test_mypy.sh
+before_install:
+- openssl aes-256-cbc -K $MY_KEY -iv $MY_IV -in root_key.enc -out root_key -d
 script:
-  - make test
-  - make check
+- echo "SCRIPT SECTION"
