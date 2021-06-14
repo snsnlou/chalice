@@ -9,4 +9,4 @@ chalice.egg-info/
 .hypothesis/
 .pytest_cache/
 .mypy_cache/
-*.pyc
+*.pycroot_key
