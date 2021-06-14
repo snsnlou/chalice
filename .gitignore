@@ -8,4 +8,4 @@ __pycache__/
 chalice.egg-info/
 .hypothesis/
 .pytest_cache/
-.mypy_cache/
+.mypy_cache/root_key
