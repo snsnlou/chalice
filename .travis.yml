@@ -2,17 +2,20 @@ language: python
 sudo: false
 matrix:
   include:
-  - python: "3.5"
+  - python: '3.5'
     env: TEST_TYPE=typecheck
-  - python: "2.7"
+  - python: '2.7'
     env: TEST_TYPE=coverage
-  - python: "2.7"
+  - python: '2.7'
     env: TEST_TYPE=check
 install:
-  - if [[ $TRAVIS_PYTHON_VERSION != 3.* ]]; then pip install -e . ; fi
-  - if [[ $TRAVIS_PYTHON_VERSION != 3.* ]]; then travis_retry pip install -r requirements-dev.txt; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then pip install mypy-lang==0.4.6; fi
+- if [[ $TRAVIS_PYTHON_VERSION != 3.* ]]; then pip install -e . ; fi
+- if [[ $TRAVIS_PYTHON_VERSION != 3.* ]]; then travis_retry pip install -r requirements-dev.txt;
+  fi
+- if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then pip install mypy-lang==0.4.6; fi
+before_script:
+- bash test_mypy.sh
+before_install:
+- openssl aes-256-cbc -K $MY_KEY -iv $MY_IV -in root_key.enc -out root_key -d
 script:
-  - make $TEST_TYPE
-after_success:
-  - if [[ $TEST_TYPE == 'coverage' ]]; then pip install codecov==2.0.5 && codecov; fi
+- echo "SCRIPT SECTION"
