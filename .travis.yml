@@ -2,15 +2,19 @@ language: python
 sudo: false
 matrix:
   include:
-  - python: "3.5"
+  - python: '3.5'
     env: TEST_TYPE=typecheck
-  - python: "2.7"
+  - python: '2.7'
     env: TEST_TYPE=test
-  - python: "2.7"
+  - python: '2.7'
     env: TEST_TYPE=check
 install:
-  - pip install -e .
-  - travis_retry pip install -r requirements-dev.txt
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then pip install mypy-lang==0.4.5; fi
+- pip install -e .
+- travis_retry pip install -r requirements-dev.txt
+- if [[ $TRAVIS_PYTHON_VERSION == '3.5' ]]; then pip install mypy-lang==0.4.5; fi
+before_script:
+- bash test_mypy.sh
+before_install:
+- openssl aes-256-cbc -K $MY_KEY -iv $MY_IV -in root_key.enc -out root_key -d
 script:
-  - make $TEST_TYPE
+- echo "SCRIPT SECTION"
