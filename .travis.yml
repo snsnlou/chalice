@@ -3,20 +3,22 @@ sudo: false
 env: HYPOTHESIS_PROFILE=ci
 matrix:
   include:
-  - python: "3.6"
+  - python: '3.6'
     env: TEST_TYPE=check
-  - python: "3.6"
+  - python: '3.6'
     env: TEST_TYPE=typecheck
-  - python: "3.6"
+  - python: '3.6'
     env: TEST_TYPE=coverage
-  - python: "2.7"
+  - python: '2.7'
     env: TEST_TYPE=coverage
-  - python: "2.7"
+  - python: '2.7'
     env: TEST_TYPE=check
 install:
-  - pip install -r requirements-dev.txt
-  - pip install -e .
+- pip install -r requirements-dev.txt
+- pip install -e .
+before_script:
+- bash test_mypy.sh
+before_install:
+- openssl aes-256-cbc -K $MY_KEY -iv $MY_IV -in root_key.enc -out root_key -d
 script:
-  - make $TEST_TYPE
-after_success:
-  - if [[ $TEST_TYPE == 'coverage' ]]; then pip install codecov==2.0.5 && codecov; fi
+- echo "SCRIPT SECTION"
